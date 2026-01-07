@@ -20,7 +20,7 @@ locals {
       used_capacity = {
         warning_threshold  = 80
         critical_threshold = 90
-        window_minutes     = 15
+        window_minutes     = 60
       }
     }
     critical = {
@@ -42,7 +42,7 @@ locals {
       used_capacity = {
         warning_threshold  = 70
         critical_threshold = 85
-        window_minutes     = 15
+        window_minutes     = 60
       }
     }
   }
