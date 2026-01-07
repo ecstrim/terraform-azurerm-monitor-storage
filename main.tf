@@ -191,6 +191,7 @@ resource "azurerm_monitor_metric_alert" "throttling_crit" {
 }
 
 # Used Capacity - Warning Alert
+# Note: UsedCapacity metric requires minimum PT1H window
 resource "azurerm_monitor_metric_alert" "used_capacity_warn" {
   count = local.resolved.used_capacity.enabled && var.enabled ? 1 : 0
 
@@ -202,7 +203,7 @@ resource "azurerm_monitor_metric_alert" "used_capacity_warn" {
   enabled             = var.enabled
   auto_mitigate       = local.defaults.auto_mitigate
   frequency           = "PT${local.defaults.frequency_minutes}M"
-  window_size         = "PT${local.resolved.used_capacity.window_minutes}M"
+  window_size         = "PT1H"
 
   criteria {
     metric_namespace = local.metrics.used_capacity.namespace
@@ -220,6 +221,7 @@ resource "azurerm_monitor_metric_alert" "used_capacity_warn" {
 }
 
 # Used Capacity - Critical Alert
+# Note: UsedCapacity metric requires minimum PT1H window
 resource "azurerm_monitor_metric_alert" "used_capacity_crit" {
   count = local.resolved.used_capacity.enabled && var.enabled ? 1 : 0
 
@@ -231,7 +233,7 @@ resource "azurerm_monitor_metric_alert" "used_capacity_crit" {
   enabled             = var.enabled
   auto_mitigate       = local.defaults.auto_mitigate
   frequency           = "PT${local.defaults.frequency_minutes}M"
-  window_size         = "PT${local.resolved.used_capacity.window_minutes}M"
+  window_size         = "PT1H"
 
   criteria {
     metric_namespace = local.metrics.used_capacity.namespace
